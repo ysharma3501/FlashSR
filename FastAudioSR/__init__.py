@@ -1,6 +1,5 @@
 import torch
 import os
-from scipy.io.wavfile import write
 from .speechsr import SynthesizerTrn
 
 class FASR:
