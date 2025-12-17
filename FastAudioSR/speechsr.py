@@ -113,11 +113,11 @@ class Generator(torch.nn.Module):
         x = F.interpolate(x, int(x.shape[-1] * 3), mode='linear')
 
         xs = self.resblocks[2](x)
-        xs += self.resblocks[1](x)
+        #xs += self.resblocks[1](x) ## removing this but adding activation post is similar quality but almost 30% faster
         xs += self.resblocks[0](x)
-        xs = xs/3
+        xs = xs/2
         
-       # xs = self.activation_post(xs)
+        xs = self.activation_post(xs)
         x = self.conv_post(xs)
         x = torch.tanh(x)
 
@@ -265,6 +265,7 @@ class SynthesizerTrn(nn.Module):
     def infer(self, x, max_len=None):
         o = self.dec(x[:,:,:max_len])
         return o
+
 
 
 
