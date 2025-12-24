@@ -2,5 +2,7 @@ einops==0.7.0
 numpy==1.26.1
 scipy==1.11.3
 timm==0.6.13
+librosa
+huggingface-hub
 # torch==2.3.0+cu121
 # torchaudio==2.3.0+cu121
