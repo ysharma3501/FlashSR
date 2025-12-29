@@ -5,7 +5,31 @@ This is a tiny audio super-resolution model based on [hierspeech++](https://gith
 FlashSR is released under an apache-2.0 license.
 
 Model link: https://huggingface.co/YatharthS/FlashSR
-## Usage
+
+## GUI Usage (Easy!)
+
+For a simple web-based GUI to enhance your audio files:
+
+1. Install dependencies:
+```bash
+pip install -r requirements-gui.txt
+pip install torch torchaudio  # or your preferred PyTorch installation
+```
+
+2. Run the GUI:
+```bash
+python app.py
+```
+
+3. The GUI will automatically open in your browser at `http://127.0.0.1:7860`
+
+4. Follow the simple steps in the GUI:
+   - Click "Load Model" to download and initialize the model
+   - Upload your audio file (any format - MP3, WAV, FLAC, etc.)
+   - Click "Enhance Audio"
+   - Listen to and download your enhanced 48kHz audio!
+
+## Programmatic Usage
 Simple 1 line installation:
 
 ```

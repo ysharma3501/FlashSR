@@ -1,0 +1,14 @@
+# Requirements for FlashSR GUI
+# Install with: pip install -r requirements-gui.txt
+
+# Core dependencies
+einops==0.7.0
+numpy==1.26.1
+scipy==1.11.3
+timm==0.6.13
+librosa
+huggingface-hub
+soundfile
+
+# GUI dependencies
+gradio>=4.0.0
