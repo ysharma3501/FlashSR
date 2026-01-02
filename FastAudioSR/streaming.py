@@ -74,7 +74,6 @@ class StreamingFASRONNX:
         """Upsample 16khz input speech to 48 khz in streaming mode. Some minimal degradation in quality is possible
         compared to non-streaming mode, especially for very small chunk sizes.
         
-        Returns a generator that yields chunks of upsampled every `chunk_size` samples of input.
         Returns None if there is not enough input yet to produce a chunk of output.
 
         Args:
@@ -82,9 +81,6 @@ class StreamingFASRONNX:
             chunk_size (int): Number of input samples to process per chunk (default is 4000 at 16khz, or 250 ms).
                               Recommended minimum is 1000 samples for lowest latency and maximum is 16000 samples
                               for highest quality.
-
-        Returns:
-            np.ndarray: 1D np.ndarray chunks of upsampled speech at 48kHz.
         """
 
         # Add audio to buffer
