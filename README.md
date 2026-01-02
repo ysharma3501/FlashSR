@@ -68,6 +68,36 @@ onnx_output = ort_session.run(["reconstruction"], {"audio_values": lowres_wav})[
 sf.write('output.wav', onnx_output.squeeze(0), samplerate=48000)
 ```
 
+# Streaming Input
+
+The onnx model can be used in streaming mode for even lower latency. With a reasonable modern desktop/laptop CPU,
+the upsampling can usually be done in real-time on a single core.
+
+```
+from FastAudioSR.streaming import StreamingFASRONNX
+import numpy as np
+import soundfile as sf
+
+# Initialize with downloaded onnx model
+model = StreamingFASRONNX('model.onnx')
+
+# Set input chunk size, which defines latency (4000 samples, 250 ms of 16khz audio in this case)
+chunk_size = 4000
+upsampled_output = []
+
+# Make generater to consume the upsampled chunks as they are ready
+gen = model.get_output(n_samples=chunk_size*3)  # 12000 samples at 48 khz, still 250 ms
+
+# Simulate streaming in 16khz audio in 250 ms chunks
+for i in range(0, len(dat), chunk_size):
+    audio_chunk = dat[i:i+chunk_size]
+    model.process_input(audio_chunk)
+    upsampled_output.append(next(gen))
+
+# Combine and save chunks, simulating real-time playback of upsampled chunks
+sf.write('output.wav', np.concatenate(upsampled_output), samplerate=48000)
+```
+
 ## Final notes
 Thanks very much to the authors of hierspeech++. Thanks for checking out this repository as well.
 
